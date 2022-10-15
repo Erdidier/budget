@@ -20,6 +20,30 @@ export const getMovements = async (req, res, next) => {
   }
 };
 
+export const getMovementsByCategory = async (req, res, next) => {
+  try {
+    const movements = await Movement.findAll({
+      where: { concept: req.params.concept },
+    });
+    res.json(movements);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+export const getMovementsByUserId = async (req, res, next) => {
+  try {
+    const movements = await Movement.findAll({
+      where: { userId: req.params.userId },
+    });
+    res.json(movements);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
 export const getMovement = async (req, res, next) => {
   try {
     const movement = await Movement.findByPk(req.params.id);
